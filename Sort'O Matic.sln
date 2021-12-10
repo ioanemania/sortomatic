@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sort'O Matic", "Sort'O Matic.csproj", "{724F16D1-BA2E-435B-B4A4-C78CFA8EA6BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{724F16D1-BA2E-435B-B4A4-C78CFA8EA6BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{724F16D1-BA2E-435B-B4A4-C78CFA8EA6BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{724F16D1-BA2E-435B-B4A4-C78CFA8EA6BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{724F16D1-BA2E-435B-B4A4-C78CFA8EA6BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {82AC64F4-DA23-41A0-8A87-5EDE00DE6898}
+	EndGlobalSection
+EndGlobal
