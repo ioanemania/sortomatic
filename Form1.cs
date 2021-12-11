@@ -16,5 +16,10 @@ namespace Sort_O_Matic
         {
             InitializeComponent();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
