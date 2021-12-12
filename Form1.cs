@@ -26,6 +26,7 @@ namespace Sort_O_Matic
         public SortOMaticForm()
         {
             InitializeComponent();
+
             InitializeSortListBox();
             InitializePanelGraphics();
             InitializeArray();
@@ -40,10 +41,11 @@ namespace Sort_O_Matic
         // Must be called before InitializeSorterTimeListView
         private void InitializeSortListBox()
         {
-            sortListBox.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            sortListBox.SelectionMode = SelectionMode.MultiSimple;
             sortListBox.Items.Add(new BubbleSorter());
             sortListBox.Items.Add(new InsertionSorter());
             sortListBox.Items.Add(new SelectionSorter());
+            sortListBox.Items.Add(new CocktailSorter());
         }
 
         // Store graphicsPanel's initial graphics state

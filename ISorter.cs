@@ -108,6 +108,55 @@ namespace Sort_O_Matic
         {
             return "Selection Sort";
         }
+    }
 
+    internal class CocktailSorter: BaseSorter
+    {
+        public override IEnumerable Sort(int[] array)
+        {
+            Stopwatch.Restart();
+
+            bool swapped = true;
+            int start = 0;
+            int end = array.Length - 1; 
+            while(swapped)
+            {
+                swapped = false;
+                for(int i = start; i  < end; i++)
+                {
+                    if(array[i] > array[i+1])
+                    {
+                        (array[i], array[i+1]) = (array[i+1], array[i]);
+                        swapped = true;
+                        yield return new int[] { i, i + 1 };
+                    }
+
+                }
+
+                if (!swapped)
+                    break;
+
+                swapped = false;
+                end--;
+
+                for(int i = end - 1; i >= start; i--)
+                {
+                    if(array[i] > array[i+1])
+                    {
+                        (array[i], array[i + 1]) = (array[i + 1], array[i]);
+                        swapped = true;
+                        yield return new int[] { i, i + 1 };
+                    }
+                }
+
+                start++;
+            }
+            Stopwatch.Stop();
+        }
+
+        public override string ToString()
+        {
+            return "Cocktail Sort";
+        }
     }
 }
