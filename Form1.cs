@@ -66,6 +66,7 @@ namespace Sort_O_Matic
         {
             backgroundWorker = new BackgroundWorker();
             backgroundWorker.WorkerReportsProgress = true;
+            backgroundWorker.WorkerSupportsCancellation = true;
             backgroundWorker.DoWork += new DoWorkEventHandler(BackgroundWorker_DoWork);
             backgroundWorker.ProgressChanged += new ProgressChangedEventHandler(BackgroundWorker_ProgressChange);
             backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(BackgroundWorker_RunWorkerCompleted);
@@ -91,18 +92,21 @@ namespace Sort_O_Matic
         {
             RandomizeArray();
             Refresh();
+            CancelWorker(backgroundWorker);
         }
 
         private void descendingArrayButton_Click(object sender, EventArgs e)
         {
             DescendingArray();
             Refresh();
+            CancelWorker(backgroundWorker);
         }
 
         private void ascendingArrayButton_Click(object sender, EventArgs e)
         {
             AscendingArray();
             Refresh();
+            CancelWorker(backgroundWorker);
         }
 
         // Handles the logic behind start/pause button
@@ -168,6 +172,13 @@ namespace Sort_O_Matic
                     graphics.FillRectangle(new SolidBrush(Color.Black), i, graphicsRectangle.Height - array[i], 1, 1);
                     graphics.FillRectangle(new SolidBrush(Color.Black), j, graphicsRectangle.Height - array[j], 1, 1);
 
+                    // Finish the thread if cancellation was requested
+                    if (worker.CancellationPending)
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
+
                     // Pause the worker and the sorter timer if mre signal is set
                     sorter.Stopwatch.Stop();
                     mre.WaitOne(System.Threading.Timeout.Infinite);
@@ -187,6 +198,7 @@ namespace Sort_O_Matic
             descendingArrayButton.Enabled = true;
 
             sortToggleButton.Text = "Start";
+            mre.Set();
             paused = true;
 
             foreach (ISorter sorter in sortListBox.Items)
@@ -207,6 +219,15 @@ namespace Sort_O_Matic
         #endregion
 
         #region Helper Functions
+        private void CancelWorker(BackgroundWorker worker)
+        {
+            if (worker.IsBusy)
+            {
+                worker.CancelAsync();
+                mre.Set(); // The worker might be blocked, allow it to proceed and cancel
+            }
+        }
+
         private void RandomizeArray()
         {
             Random random = new Random();
